@@ -46,7 +46,7 @@ height:35px;
 </style>
 
 
-</head>
+-</head>
 
 <body>
 
@@ -148,13 +148,13 @@ font-size:15px; line-height:94px;" ><strong>
 if(isset($_GET['id']))
 {
 $idd = $_GET['id'];
-if(isset($_REQUEST['btn']))
+if(isset($_POST['btn']))
 {
 	
 	
-		$na = $_REQUEST['bb'];
-		$nb = $_REQUEST['cc'];
-		$nc = $_REQUEST['dd'];
+		$na = $_POST['bb'];
+		$nb = $_POST['cc'];
+		$nc = $_POST['dd'];
 		
 		$u="UPDATE number SET name = '$na', email = '$nb', phone_no = '$nc' where id = '$idd' ";
 		echo $u;

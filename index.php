@@ -139,12 +139,12 @@ font-size:15px; line-height:94px;" ><strong>
 
 
 
-if(isset($_REQUEST['b1']))
+if(isset($_POST['b1']))
 {
-	$nam = $_REQUEST['t1'];
-	$nam2 = $_REQUEST['t2'];
-	$nam3 = $_REQUEST['t3'];
-	$nam4 = $_REQUEST['t4'];
+	$nam = $_POST['t1'];
+	$nam2 = $_POST['t2'];
+	$nam3 = $_POST['t3'];
+	$nam4 = $_POST['t4'];
 	
 	$q=" INSERT INTO signup(id,name,email,password,mobile) VALUES (NULL,'$nam','$nam2','$nam3','$nam4')";
 	
@@ -246,10 +246,10 @@ Login Your Account Here
 </div>
 <?php 
 session_start();
-if(isset($_REQUEST['b2']))
+if(isset($_POST['b2']))
 {
-$a = $_REQUEST['t2'];
-$b = $_REQUEST['t3'];
+$a = $_POST['t2'];
+$b = $_POST['t3'];
 $quy = "SELECT * FROM signup WHERE email  = '$a' AND password = '$b'";
 
 	$res = mysqli_query($con,$quy);

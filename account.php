@@ -146,12 +146,12 @@ font-size:15px; line-height:94px;" ><strong>
 	$con = mysqli_connect("localhost", "root", "", "phone_directory");
 	$dbo = new PDO('mysql:host='.$dbhost_name.';dbname='.$database, $username, $password);
 	
-	if(isset($_REQUEST['btn']))
+	if(isset($_POST['btn']))
 	{
 		$i=$_SESSION['SESS_ID'];
-	$name=$_REQUEST['t1'];
-	$ema=$_REQUEST['t2'];
-	$pno=$_REQUEST['t3'];
+	$name=$_POST['t1'];
+	$ema=$_POST['t2'];
+	$pno=$_POST['t3'];
 	$qry = "INSERT INTO number(id,signup_id,name,email,phone_no)VALUES(NULL,'$i','$name','$ema','$pno')";
 	mysqli_query($con,$qry);
 	}
