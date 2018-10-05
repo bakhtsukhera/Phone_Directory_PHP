@@ -108,7 +108,7 @@ border-bottom:solid 1px #E7E7E7; position:fixed;">
 
 <!-- Body start-->
 
-<div style="width:1347px;  height:450px;   background-color:#FFFFFF;   ">
+<div style="width:1347px;  height:450px;   background-color:# 1F0528;   ">
 
 <div style="width:1px; height:1px"></div>
 
@@ -135,6 +135,7 @@ font-size:15px; line-height:94px;" ><strong>
 <!-- Welcome to tinker telecome end-->
 
 
+<div style="width:747px;  height:370px;   background-color:# 1BBD36; margin-top:0px; float:left  ">
 
 <?php
 
@@ -154,10 +155,13 @@ font-size:15px; line-height:94px;" ><strong>
 	$pno=$_POST['t3'];
 	$qry = "INSERT INTO number(id,signup_id,name,email,phone_no)VALUES(NULL,'$i','$name','$ema','$pno')";
 	mysqli_query($con,$qry);
+	
+	
+	
 	}
 ?>
 
-<body>
+
 <div style="margin-left:650px"><a href="">&nbsp;</a></div>
 <form name="f1" method="post" align="center">
 
@@ -179,7 +183,6 @@ font-size:15px; line-height:94px;" ><strong>
 
 <hr>
 
-
 <style>
 table {
     border-collapse: collapse;
@@ -187,7 +190,7 @@ table {
 }
 
 th, td {
-    text-align: left;
+    text-align: center;
     padding: 8px;
 }
 
@@ -223,18 +226,24 @@ $q = "SELECT * FROM number where signup_id = '$i' ";
 	{
  ?>
 
-<tr>
+<tr  align="center">
 
 <td><?php echo $row->id;  ?></td>
 <td><?php echo $row->name; ?></td>
 <td><?php echo $row->email; ?></td>
 <td align="center"><?php echo $row->phone_no; ?></td>
-<td>
+<td  text-align="center">
 			<a onclick="return confirm('Are u sure to delete')"  href="del.php?id=<?php echo $row->id; ?>">
 												
 													<span class="label label-table label-danger"><img src="images/del.png" width="20px" height="20px"/></span></a>
 													<a href="update.php?id=<?php echo $row->id; ?>">
-													<span  class="label label-table label-primary"><img src="images/edit.png" width="20px" height="20px"/></span></a>
+													
+													<span  class="label label-table label-primary">
+													<img src="images/edit.png" width="20px" height="20px"/></span></a>
+													<a href="share.php?id=<?php echo $row->id; ?>">
+													
+													<span  class="label label-table label-primary">
+													share</span></a>
 												</td>
 
 												
@@ -248,15 +257,85 @@ $q = "SELECT * FROM number where signup_id = '$i' ";
  ?>
 </table>
 
-
-
-
-
-
 </div>
 
+
+
+<div style="width:600px;  height:370px;   background-color:# 92F100; margin-top:40px; float:left ">
+
+<hr>
+<style>
+table {
+    border-collapse: collapse;
+    width: 70%;
+}
+
+th, td {
+    text-align: center;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+</style>
+
+<font style="font-family:Arial, Helvetica, sans-serif; color:#000;
+font-size:15px; line-height:94px;" ><strong>
+ 
+					<h1><center>Shared Contacts</center></h1>
+				
+
+</strong></font>
+<table border="1 " cellpadding="0" cellspacing="0" align="center">
+<tr>
+<td>ID</td>
+<td>Name</td>
+<td>Email</td>
+<td>Phone Num</td>
+<td>Sender-NAME</td>
+<td align="center">Action</td>
+
+</tr>
+<?php
+$ik=$_SESSION['SESS_ID'];
+$q56 = "SELECT * FROM share where receiver_id = '$ik' ";
+	$rest = mysqli_query($con,$q56);
+	while($row = mysqli_fetch_object($rest))
+	{
+ ?>
+
+<tr  align="center">
+
+<td><?php echo $row->id;  ?></td>
+<td><?php echo $row->name; ?></td>
+<td><?php echo $row->email; ?></td>
+<td align="center"><?php echo $row->phone_no; ?></td>
+<td align="center"><?php echo $row->sender_name; ?></td>
+<td  text-align="center">
+			<a onclick="return confirm('Are u sure to delete')"  href="del_share.php?id=<?php echo $row->id; ?>">
+												
+													<span class="label label-table label-danger"><img src="images/del.png" width="20px" height="20px"/></span></a>
+												</td>
+
+												
+												
+												
+												
+
+</tr>
+<?php
+}
+ ?>
+</table>
+</div>
+</div>
+<br><br><br><br><br><br><br><br><br><br>
 <!-- Body End-->
-<br><br><br><br><br><br><br><br>
+
 
 <!-- Footer start-->
 
@@ -331,7 +410,7 @@ Bakht Jamal Sukhera
 
 
 </div>
-
+</div>
 <!-- MAin DIV End-->
 
 

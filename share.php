@@ -115,27 +115,27 @@ border-bottom:solid 1px #E7E7E7; position:fixed;">
 <!-- Welcome to tinker telecome start-->
 
 <div style="width:1347px;  height:80px;   background-color:#1BBD36; margin-top:80px; ">
-<div style="margin-left:125px; ">
+<div style="margin-left:125px; width:; ">
+
 <font style="font-family:Arial, Helvetica, sans-serif; color:#000;
 font-size:15px; line-height:94px;" ><strong>
  
 					<h4>Welcome <font color="white" font-size="30px"><?php echo $_SESSION['SESS_NAME']; ?></font></h4>
+					
 				
 
 </strong></font>
-<font style="font-family:Arial, Helvetica, sans-serif; color:#FFF;
-font-size:15px; line-height:94px;" ><strong>
 
-</strong></font>
+
+
 </div>
 <div style="width:147px;   background-color:#1BBD36; margin-top:-70px; margin-left:50px; ">
 <span><a href="account.php"><img src="images/b.png" height="20px" width="20px" style="margin-top:0px" /></a></span>
 </div>
 </div>
 
+	
 
-
-<!-- Welcome to tinker telecome end-->
 
 
 
@@ -148,40 +148,83 @@ font-size:15px; line-height:94px;" ><strong>
 	$password = "";
 	$con = mysqli_connect("localhost", "root", "", "phone_directory");
 	$dbo = new PDO('mysql:host='.$dbhost_name.';dbname='.$database, $username, $password);
+	
+
+
 if(isset($_GET['id']))
 {
 $idd = $_GET['id'];
+
+$qii = "SELECT * FROM number WHERE id = '$idd' ";
+
+	$res1 = mysqli_query($con,$qii);
+	while($rowss = mysqli_fetch_object($res1))
+	{
+		$k= $rowss->signup_id;
+		$d1= $rowss->name;
+		$d2= $rowss->email;
+		$d3= $rowss->phone_no;
+		
+		
+		
+	}
+
+		$qii2 = "SELECT * FROM signup WHERE id = '$k' ";
+
+	$res2 = mysqli_query($con,$qii2);
+	while($rowss2 = mysqli_fetch_object($res2))
+	{
+		
+		$s1= $rowss2->id;
+		$s2= $rowss2->name;
+
+	}
+
+
 if(isset($_POST['btn']))
 {
-	
-	
-		$na = $_POST['bb'];
-		$nb = $_POST['cc'];
-		$nc = $_POST['dd'];
-		
-		$u="UPDATE number SET name = '$na', email = '$nb', phone_no = '$nc' where id = '$idd' ";
-		echo $u;
-		
-		mysqli_query($con,$u);
-		
-		header("location:account.php");
-	
-	}
-	$qry = "SELECT * FROM number WHERE id = '$idd'";
-	$result = mysqli_query($con,$qry);
-	while($row = mysqli_fetch_object($result))
-	{
+$a = $_POST['t1'];
 
+$quy = "SELECT * FROM signup WHERE email  = '$a' ";
+
+	$res = mysqli_query($con,$quy);
+
+
+if(mysqli_num_rows($res)>0)
+{
+	session_regenerate_id();
+	$ses = mysqli_fetch_assoc($res);
+	$_SESSION['SESSH_ID'] = $ses['id'];
+	
+	
+	
+	session_write_close();
+	$send_id= $s1;
+	$send_name= $s2;
+	$receive_id=$_SESSION['SESSH_ID'];
+	$e1=$d1;
+	$e2=$d2;
+	$e3=$d3;
+
+	$qss="INSERT INTO share (id,sender_id,sender_name,receiver_id,name,email,phone_no) 
+VALUES(NULL,'$send_id','$send_name','$receive_id','$e1','$e2','$e3')";
+mysqli_query($con,$qss);
+	
+	header("location:account.php");
+}
+}
+
+	
+}
 ?>
 <table cellpadding="0" cellspacing="0" border="1" style="margin-top:10px;" align="center">
 
 
 
-<tr ><th colspan="4"align="center"><center>Update Record</center></th></tr>
+<tr ><th colspan="4"align="center"><center>Share Record</center></th></tr>
 <tr>
-<td>NAME</td>
+
 <td>EMAIL</td>
-<td>PHONE NUM</td>
 
 <td>ACTION</td>
 </tr>
@@ -190,18 +233,17 @@ if(isset($_POST['btn']))
    
 <tr>
 
-<td><input type="text" name="bb" value="<?php echo $row->name; ?>" /></td>
-<td><input type="email" name="cc" value="<?php echo $row->email; ?>" /></td>
-<td><input type="number" name="dd" value="<?php echo $row->phone_no; ?>" /></td>
+<td><input type="email" name="t1" value="" style="width:200px" placeholder="Enter Email" /></td>
 
 
-<td><input type="submit" name="btn" value="update" /></td>
+
+<td><input type="submit" name="btn" value="share" /></td>
 </tr>
 
     </form>
 <?php 
-	}
-}
+
+
 	?>
 </table>
 
@@ -212,7 +254,7 @@ if(isset($_POST['btn']))
 <style>
 table {
     border-collapse: collapse;
-    width: 70%;
+    width: 40%;
 }
 
 th, td {
